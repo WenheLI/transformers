@@ -508,7 +508,7 @@ class VideoMAEPreTrainedModel(PreTrainedModel):
     main_input_name = "pixel_values"
     supports_gradient_checkpointing = True
     _supports_sdpa = True
-    _no_split_modules = ["VideoMAEEmbeddings", "VideoMAEEncoder"]
+    _no_split_modules = ["VideoMAEEmbeddings", "VideoMAESdpaAttention", "VideoMAEAttention"]
 
     def _init_weights(self, module):
         """Initialize the weights"""
