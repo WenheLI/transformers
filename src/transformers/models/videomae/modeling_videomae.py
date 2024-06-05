@@ -508,6 +508,7 @@ class VideoMAEPreTrainedModel(PreTrainedModel):
     main_input_name = "pixel_values"
     supports_gradient_checkpointing = True
     _supports_sdpa = True
+    _no_split_modules = []
 
     def _init_weights(self, module):
         """Initialize the weights"""
@@ -575,7 +576,6 @@ class VideoMAEModel(VideoMAEPreTrainedModel):
 
         # Initialize weights and apply final processing
         self.post_init()
-        _no_split_modules = []
 
     def get_input_embeddings(self):
         return self.embeddings.patch_embeddings
