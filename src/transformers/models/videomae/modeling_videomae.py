@@ -575,6 +575,7 @@ class VideoMAEModel(VideoMAEPreTrainedModel):
 
         # Initialize weights and apply final processing
         self.post_init()
+        _no_split_modules = []
 
     def get_input_embeddings(self):
         return self.embeddings.patch_embeddings
