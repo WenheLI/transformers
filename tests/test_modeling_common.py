@@ -3119,6 +3119,9 @@ class ModelTesterMixin:
                     max_memory = {0: max_size, "cpu": model_size * 2}
                     new_model = model_class.from_pretrained(tmp_dir, device_map="auto", max_memory=max_memory)
                     # Making sure part of the model will actually end up offloaded
+                    print(new_model)
+                    print(new_model.hf_device_map)
+                    print(set(new_model.hf_device_map.values()), new_model.hf_device_map.values())
                     self.assertSetEqual(set(new_model.hf_device_map.values()), {0, "cpu"})
 
                     self.check_device_map_is_respected(new_model, new_model.hf_device_map)
@@ -3151,6 +3154,7 @@ class ModelTesterMixin:
             model_size = compute_module_sizes(model)[""]
             # We test several splits of sizes to make sure it works.
             max_gpu_sizes = [int(p * model_size) for p in self.model_split_percents[1:]]
+            print(model_class)
             with tempfile.TemporaryDirectory() as tmp_dir:
                 model.cpu().save_pretrained(tmp_dir)
 

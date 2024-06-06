@@ -464,7 +464,13 @@ class XCLIPPreTrainedModel(PreTrainedModel):
     config_class = XCLIPConfig
     base_model_prefix = "x_clip"
     supports_gradient_checkpointing = True
-
+    #_no_split_modules = ["XCLIPEncoderLayer", "XCLIPVisionEncoderLayer", "XCLIPTextEmbeddings"]
+    _no_split_modules = [
+        "XCLIPAttention",
+        "XCLIPMLP",
+        "LayerNorm",
+        "XCLIPTextTransformer"
+    ]
     def _init_weights(self, module):
         """Initialize the weights"""
         factor = self.config.initializer_factor
